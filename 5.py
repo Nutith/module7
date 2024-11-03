@@ -8,7 +8,7 @@ TIB = KIB ** 4
 
 
 for root, dirs, files in os.walk('.'):
-    print(f'{os.path.join(root)} [{os.getcwd()}]')
+    print(f'[{os.getcwd()}] {os.path.join(root)}')
 
     for file in files:
         if not os.access(os.path.join(root, file), os.R_OK):
