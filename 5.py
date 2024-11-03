@@ -1,14 +1,14 @@
 import os
 import time
 
-KIB = 1000
+KIB = 2 ** 10
 MIB = KIB ** 2
 GIB = KIB ** 3
 TIB = KIB ** 4
 
 
 for root, dirs, files in os.walk('.'):
-    print(os.path.join(root))
+    print(f'{os.path.join(root)} [{os.getcwd()}]')
 
     for file in files:
         if not os.access(os.path.join(root, file), os.R_OK):
@@ -34,6 +34,11 @@ for root, dirs, files in os.walk('.'):
             size_suffics = 'TiB'
             size = os_size / TIB
 
-        print(f'\t{file[:46]:.<50} '
-              f'{size:5.1f} {size_suffics:<5}'
+        if size % 1 == 0:
+            size = f'{size:6.0f}'
+        else:
+            size = f'{size:6.1f}'
+
+        print(f'\t{file[:46]:.<50}'
+              f'{size} {size_suffics:<5}'
               f'{mtime}')
